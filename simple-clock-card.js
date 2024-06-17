@@ -14,9 +14,19 @@ class SimpleClockCard extends HTMLElement {
 			this.content.style.fontWeight = this.config.bold_clock ? '900' : undefined ;
 			this.style.textAlign = 'center';
 			this.content.style.display = 'inline-block';
+			this.date = document.createElement('div');
+			this.date.style.paddingLeft = this.config.paddingLeft_size ? this.config.paddingLeft_size : '0px';
+			this.date.style.paddingRight = this.config.paddingRight_size ? this.config.paddingRight_size : '0px';
+			this.date.style.paddingTop = this.config.paddingTop_size ? this.config.paddingTop_size : '60px';
+			this.date.style.paddingBottom = this.config.paddingBottom_size ? this.config.paddingBottom_size : '60px';
+			this.date.style.fontSize = this.config.font_size ? this.config.font_size : '4rem' ;
+			this.date.style.fontWeight = this.config.bold_clock ? '900' : undefined ;
+			this.date.textAlign = 'center';
+			card.appendChild(this.date);
 			card.appendChild(this.content);
 			this.appendChild(card);
 			var content = this.content;
+			var date = this.date;
 			startTime();
 			setInterval(startTime, 1000);
 	
@@ -46,6 +56,8 @@ class SimpleClockCard extends HTMLElement {
                    (hide_seconds ? "" : ":" + s ) +
                    (use_military ? " " : " " + p );
 				content.innerHTML = time_str;
+
+				date.innerHTML = today.toLocaleDateString('de-de', { year:"numeric", month:"2-digit", day:"2-digit"}) 
 			}
 		}
 	}
